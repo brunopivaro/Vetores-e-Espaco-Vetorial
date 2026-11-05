@@ -1,5 +1,6 @@
 # Importando os pacotes
 
+import collections
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -40,4 +41,66 @@ plt.axis([-4, 4, -4, 4])
 plt.legend([vetor_imagem], ['u'])
 plt.title('Vetor no Plano Cartesiano')
 plt.savefig('grafico_01.png')
+plt.show()
+
+# Efeito de valores escalares no vetor
+
+valores_escalares = [1, 2, 1/2, -1, -2]
+
+vetor_inicial = np.array([ .9, 1.2])
+
+# Criando figura
+fig, axs = plt.subplots(1, len(valores_escalares), figsize = (14, 5))
+
+# Loop
+i = 0
+
+for valor in valores_escalares:
+    
+    vetor_resultante = valor * vetor_inicial
+
+    # Plot do vetor inicial
+    axs[i].arrow(
+        0,
+        0,
+        vetor_inicial[0],
+        vetor_inicial[1],
+        head_width = .3,
+        width = .1,
+        color = 'blue',
+        length_includes_head = True
+    )
+
+    # Plot do vetor resultante
+    axs[i].arrow(
+        0.1,
+        0,
+        vetor_resultante[0],
+        vetor_resultante[1],
+        head_width = .3,
+        width = .1,
+        color = 'red',
+        length_includes_head = True
+    )
+
+    # Grid
+    axs[i].grid(linestyle = '--')
+
+    # Formato
+    axs[i].axis('square')
+
+    # Eixos
+    axs[i].axis([-2.5, 2.5, -2.5, 2.5])
+
+    # Limites
+    axs[i].set(xticks = np.arange(-2, 3), yticks = np.arange(-2, 3))
+
+    # Título
+    axs[i].set_title(f'$\sigma$ = {valor:.2f}')
+
+    # Contador
+    i += 1
+
+plt.tight_layout()
+plt.savefig('grafico_02.png')
 plt.show()
